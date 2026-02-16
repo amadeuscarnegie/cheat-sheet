@@ -26,7 +26,7 @@ export const claudeCode: CheatCategory = {
         { id: "cc-submit", label: "Submit message", shortcut: { kind: "keys", keys: ["Enter"] }, defaultPriority: "known" },
         { id: "cc-prev-history", label: "Previous message", shortcut: { kind: "keys", keys: ["\u2191"] }, defaultPriority: "known" },
         { id: "cc-next-history", label: "Next message", shortcut: { kind: "keys", keys: ["\u2193"] }, defaultPriority: "known" },
-        { id: "cc-undo", label: "Undo last edit", shortcut: { kind: "keys", keys: ["Ctrl", "_"] }, defaultPriority: "learning" },
+        { id: "cc-undo", label: "Undo last edit", shortcut: { kind: "keys", keys: ["Ctrl", "_"] }, description: "Also: Ctrl+Shift+-", defaultPriority: "learning" },
         { id: "cc-external-editor", label: "Open external editor", shortcut: { kind: "keys", keys: ["Ctrl", "G"] }, defaultPriority: "learning" },
         { id: "cc-stash", label: "Stash message", shortcut: { kind: "keys", keys: ["Ctrl", "S"] }, defaultPriority: "learning" },
         { id: "cc-paste-image", label: "Paste image", shortcut: { kind: "keys", keys: ["Ctrl", "V"] }, defaultPriority: "learning" },
@@ -45,7 +45,12 @@ export const claudeCode: CheatCategory = {
       title: "Confirmation Prompts",
       items: [
         { id: "cc-yes", label: "Accept", shortcut: { kind: "keys", keys: ["Y"] }, defaultPriority: "known" },
+        { id: "cc-yes-enter", label: "Accept (Enter)", shortcut: { kind: "keys", keys: ["Enter"] }, defaultPriority: "known" },
         { id: "cc-no", label: "Reject", shortcut: { kind: "keys", keys: ["N"] }, defaultPriority: "known" },
+        { id: "cc-no-esc", label: "Reject (Esc)", shortcut: { kind: "keys", keys: ["Esc"] }, defaultPriority: "known" },
+        { id: "cc-confirm-prev", label: "Previous option", shortcut: { kind: "keys", keys: ["\u2191"] }, defaultPriority: "known" },
+        { id: "cc-confirm-next", label: "Next option", shortcut: { kind: "keys", keys: ["\u2193"] }, defaultPriority: "known" },
+        { id: "cc-confirm-tab", label: "Next field", shortcut: { kind: "keys", keys: ["Tab"] }, defaultPriority: "learning" },
         { id: "cc-toggle", label: "Toggle option", shortcut: { kind: "keys", keys: ["Space"] }, defaultPriority: "known" },
         { id: "cc-cycle-confirm", label: "Cycle mode", shortcut: { kind: "keys", keys: ["Shift", "Tab"] }, defaultPriority: "learning" },
         { id: "cc-explanation", label: "Toggle explanation", shortcut: { kind: "keys", keys: ["Ctrl", "E"] }, defaultPriority: "learning" },
@@ -56,9 +61,30 @@ export const claudeCode: CheatCategory = {
       items: [
         { id: "cc-select-prev", label: "Previous item", shortcut: { kind: "keys", keys: ["K"] }, context: "vim-style", defaultPriority: "known" },
         { id: "cc-select-next", label: "Next item", shortcut: { kind: "keys", keys: ["J"] }, context: "vim-style", defaultPriority: "known" },
+        { id: "cc-select-prev-ctrl", label: "Previous item", shortcut: { kind: "keys", keys: ["Ctrl", "P"] }, context: "emacs-style", defaultPriority: "learning" },
+        { id: "cc-select-next-ctrl", label: "Next item", shortcut: { kind: "keys", keys: ["Ctrl", "N"] }, context: "emacs-style", defaultPriority: "learning" },
         { id: "cc-select-accept", label: "Accept selection", shortcut: { kind: "keys", keys: ["Enter"] }, defaultPriority: "known" },
+        { id: "cc-select-cancel", label: "Cancel selection", shortcut: { kind: "keys", keys: ["Esc"] }, defaultPriority: "known" },
         { id: "cc-settings-search", label: "Search settings", shortcut: { kind: "keys", keys: ["/"] }, defaultPriority: "learning" },
         { id: "cc-settings-retry", label: "Retry", shortcut: { kind: "keys", keys: ["R"] }, defaultPriority: "learning" },
+      ],
+    },
+    {
+      title: "Tabs",
+      items: [
+        { id: "cc-tab-next", label: "Next tab", shortcut: { kind: "keys", keys: ["Tab"] }, defaultPriority: "learning" },
+        { id: "cc-tab-prev", label: "Previous tab", shortcut: { kind: "keys", keys: ["Shift", "Tab"] }, defaultPriority: "learning" },
+        { id: "cc-tab-right", label: "Next tab (arrow)", shortcut: { kind: "keys", keys: ["\u2192"] }, defaultPriority: "learning" },
+        { id: "cc-tab-left", label: "Previous tab (arrow)", shortcut: { kind: "keys", keys: ["\u2190"] }, defaultPriority: "learning" },
+      ],
+    },
+    {
+      title: "Footer",
+      items: [
+        { id: "cc-footer-next", label: "Next footer item", shortcut: { kind: "keys", keys: ["\u2192"] }, defaultPriority: "learning" },
+        { id: "cc-footer-prev", label: "Previous footer item", shortcut: { kind: "keys", keys: ["\u2190"] }, defaultPriority: "learning" },
+        { id: "cc-footer-open", label: "Open selected", shortcut: { kind: "keys", keys: ["Enter"] }, defaultPriority: "learning" },
+        { id: "cc-footer-clear", label: "Clear selection", shortcut: { kind: "keys", keys: ["Esc"] }, defaultPriority: "learning" },
       ],
     },
     {
@@ -174,6 +200,13 @@ export const claudeCode: CheatCategory = {
         { id: "cc-mcp-playwright", label: "playwright", shortcut: { kind: "text", text: "Browser automation" }, defaultPriority: "known" },
         { id: "cc-mcp-figma", label: "Figma", shortcut: { kind: "text", text: "Design data, screenshots, variables" }, defaultPriority: "known" },
         { id: "cc-mcp-slack", label: "Slack", shortcut: { kind: "text", text: "Read/send messages, search channels" }, defaultPriority: "known" },
+      ],
+    },
+    {
+      title: "Environment",
+      items: [
+        { id: "cc-env-teams", label: "Agent teams", shortcut: { kind: "text", text: "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1" }, description: "Enables multi-agent team collaboration", defaultPriority: "known" },
+        { id: "cc-env-autocompact", label: "Auto-compact override", shortcut: { kind: "text", text: "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=100" }, description: "Context % threshold for auto-compaction", defaultPriority: "advanced" },
       ],
     },
     {

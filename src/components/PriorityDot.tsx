@@ -22,13 +22,19 @@ export function PriorityDot({ priority, onClick }: PriorityDotProps) {
   return (
     <button
       type="button"
-      onClick={onClick}
-      title={`${titleMap[priority]} (click to cycle)`}
+      onClick={(e) => {
+        e.stopPropagation()
+        onClick()
+      }}
+      aria-label={`Priority: ${titleMap[priority]}. Click to cycle.`}
       className={cn(
-        "w-2.5 h-2.5 rounded-full shrink-0 cursor-pointer",
-        "transition-colors duration-200 hover:scale-125",
-        colorMap[priority],
+        "w-5 h-5 rounded-full shrink-0 cursor-pointer",
+        "flex items-center justify-center",
+        "transition-colors duration-200 hover:scale-110",
+        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent-claude)]",
       )}
-    />
+    >
+      <span className={cn("w-2.5 h-2.5 rounded-full", colorMap[priority])} />
+    </button>
   )
 }

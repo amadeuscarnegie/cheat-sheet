@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from "react"
+import { useRef, useEffect, useState } from "react"
 import { Search, X } from "lucide-react"
 import { searchItems, type SearchResult } from "@/lib/search"
 import type { CheatCategory, Priority } from "@/data/types"
@@ -27,18 +27,22 @@ export function CommandPalette({
   useEffect(() => {
     if (open) {
       setQuery("")
-      setTimeout(() => inputRef.current?.focus(), 50)
+      requestAnimationFrame(() => inputRef.current?.focus())
     }
   }, [open])
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
+  // Global Escape listener — works regardless of focus position
+  useEffect(() => {
+    if (!open) return
+    function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
+        e.preventDefault()
         onClose()
       }
-    },
-    [onClose],
-  )
+    }
+    window.addEventListener("keydown", handleEscape)
+    return () => window.removeEventListener("keydown", handleEscape)
+  }, [open, onClose])
 
   if (!open) return null
 
@@ -55,6 +59,9 @@ export function CommandPalette({
     >
       <div className="fixed inset-0 bg-[var(--color-overlay)]" />
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search shortcuts"
         className="relative w-full max-w-lg mx-4 bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-xl shadow-2xl animate-[scale-in_0.2s_ease-out_both] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
@@ -65,7 +72,6 @@ export function CommandPalette({
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
             placeholder="Search shortcuts, commands, tools..."
             className="flex-1 bg-transparent text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] outline-none"
           />

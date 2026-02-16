@@ -71,10 +71,12 @@ export function CategoryPane({
         learningCount={learningCount}
         expanded={expanded}
         onToggle={onToggle}
+        paneId={category.id}
       />
 
       {displayGroups.length > 0 && (
         <div
+          id={`pane-content-${category.id}`}
           className={cn(
             "overflow-hidden transition-all duration-300",
             expanded ? "max-h-[5000px] opacity-100" : "max-h-[800px] opacity-100",

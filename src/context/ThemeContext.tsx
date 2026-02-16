@@ -1,4 +1,4 @@
-import { createContext, useContext, useCallback } from "react"
+import { createContext, useContext, useCallback, useEffect } from "react"
 import { useLocalStorage } from "@/hooks/useLocalStorage"
 
 type Theme = "dark" | "light"
@@ -17,15 +17,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useLocalStorage<Theme>("cheat-sheet-theme", "dark")
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const next = prev === "dark" ? "light" : "dark"
-      document.documentElement.className = next
-      return next
-    })
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"))
   }, [setTheme])
 
-  // Sync class on mount
-  document.documentElement.className = theme
+  useEffect(() => {
+    document.documentElement.className = theme
+  }, [theme])
 
   return (
     <ThemeContext value={{ theme, toggleTheme }}>

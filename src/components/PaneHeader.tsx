@@ -24,6 +24,7 @@ interface PaneHeaderProps {
   learningCount: number
   expanded: boolean
   onToggle: () => void
+  paneId: string
 }
 
 export function PaneHeader({
@@ -34,6 +35,7 @@ export function PaneHeader({
   learningCount,
   expanded,
   onToggle,
+  paneId,
 }: PaneHeaderProps) {
   const IconComponent = iconMap[icon] ?? Terminal
 
@@ -41,6 +43,8 @@ export function PaneHeader({
     <button
       type="button"
       onClick={onToggle}
+      aria-expanded={expanded}
+      aria-controls={`pane-content-${paneId}`}
       className={cn(
         "w-full flex items-center gap-3 p-3 rounded-lg cursor-pointer",
         "hover:bg-[var(--color-bg-card-hover)] transition-colors",
