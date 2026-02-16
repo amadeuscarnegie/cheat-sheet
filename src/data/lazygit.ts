@@ -7,6 +7,12 @@ export const lazygit: CheatCategory = {
   accentColor: "var(--color-accent-lazygit)",
   groups: [
     {
+      title: "Launch",
+      items: [
+        { id: "lg-launch", label: "Open lazygit", shortcut: { kind: "alias", alias: "lg", expansion: "lazygit" }, description: "Shell alias defined in ~/.zshrc", defaultPriority: "known" },
+      ],
+    },
+    {
       title: "Navigation",
       items: [
         { id: "lg-status", label: "Status panel", shortcut: { kind: "keys", keys: ["1"] }, defaultPriority: "known" },

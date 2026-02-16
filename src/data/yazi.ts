@@ -7,6 +7,12 @@ export const yazi: CheatCategory = {
   accentColor: "var(--color-accent-yazi)",
   groups: [
     {
+      title: "Launch",
+      items: [
+        { id: "yz-launch", label: "Open yazi (shell follows)", shortcut: { kind: "alias", alias: "ya", expansion: "yazi (cwd follows on exit)" }, description: "Shell function in ~/.zshrc — cd follows you when you navigate", defaultPriority: "known" },
+      ],
+    },
+    {
       title: "Navigation",
       items: [
         { id: "yz-up", label: "Move up", shortcut: { kind: "keys", keys: ["K"] }, defaultPriority: "known" },
